@@ -1,0 +1,107 @@
+surfaces:
+  S01:
+    surface: repo
+    what: Anyone who can read the repository can read its history.
+    owner: platform team
+    attacker_needs: read access to the repository
+    attacker_gets: any secret ever committed
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S02:
+    surface: workflow
+    what: Workflow input and outputs cross jobs with different permissions.
+    owner: platform team
+    attacker_needs: control of an issue, pull request or lower-trust run
+    attacker_gets: workflow token capabilities and secrets available to the consumer
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S03:
+    surface: ai-agent
+    what: Issue text can steer an AI step that has tools and credentials.
+    owner: platform team
+    attacker_needs: ability to submit issue text
+    attacker_gets: tools and permissions exposed to the agent job
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S04:
+    surface: borrowed-code
+    what: Actions, packages and scanners execute code from other publishers.
+    owner: platform team
+    attacker_needs: a mutable reference or compromised publisher
+    attacker_gets: the rights available to the consumer job
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S05:
+    surface: image
+    what: Build inputs determine the bytes shipped to the cluster.
+    owner: platform team
+    attacker_needs: influence over source, dependency or builder
+    attacker_gets: code execution in the deployed workload
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S06:
+    surface: admission
+    what: A cluster decides which image identity may run.
+    owner: platform team
+    attacker_needs: permission to request a workload rollout
+    attacker_gets: execution in the namespace
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S07:
+    surface: runtime
+    what: A process can use its service account and network paths.
+    owner: platform team
+    attacker_needs: code execution in a pod
+    attacker_gets: reachable API objects and services
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S08:
+    surface: cloud
+    what: An application request or CI identity can reach a cloud role.
+    owner: platform team
+    attacker_needs: request forgery or a workflow identity accepted by trust
+    attacker_gets: actions granted to the role
+    status: open
+    platform: ""
+    test: ""
+    after: ""
+    retested: ""
+    measures: []
+  S08a:
+    surface: accepted-exception
+    what: Checkout must reach an approved public HTTPS destination.
+    owner: team-checkout
+    attacker_needs: an application request to the allowed host
+    attacker_gets: public response data
+    status: open
+    reason: ""
+    expires: ""
+    measures: []

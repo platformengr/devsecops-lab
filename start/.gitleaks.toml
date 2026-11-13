@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[[rules]]
+id = "platformengr-lab-token"
+description = "Fake PlatformEngr lab token format"
+regex = '''pe_live_[A-Z0-9_]{12,}'''
+keywords = ["pe_live_"]

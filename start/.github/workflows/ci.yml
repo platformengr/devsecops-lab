@@ -1,0 +1,21 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions: {}
+jobs:
+  test:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate evidence
+        run: ./scripts/validate.sh
+      - name: Create report artifact
+        run: mkdir report && printf '{"passed":1}\n' > report/summary.json && cp scripts/report.sh report/summary.sh
+      - uses: actions/upload-artifact@v7
+        with:
+          name: report
+          path: report/

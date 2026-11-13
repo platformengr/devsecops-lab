@@ -1,0 +1,18 @@
+name: Local triage stand-in
+description: Deterministic offline model stand-in for the DevSecOps lab
+inputs:
+  prompt:
+    required: true
+    description: Prompt text for the offline stand-in
+  tools:
+    required: true
+    description: Comma-separated tools exposed to the stand-in
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        PROMPT: ${{ inputs.prompt }}
+        TOOLS: ${{ inputs.tools }}
+        ISSUE_TITLE: ${{ env.ISSUE_TITLE }}
+      run: node labs/agent/triage-agent.mjs "$PROMPT $ISSUE_TITLE" "$TOOLS"

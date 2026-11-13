@@ -1,0 +1,17 @@
+name: oidc-whoami
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: [.github/workflows/oidc-whoami.yml]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Decode claims, never print the token
+        run: node tools/token-exchange/claims.mjs
+      - name: Evaluate local trust fixture
+        run: node tools/token-exchange/exchange.mjs

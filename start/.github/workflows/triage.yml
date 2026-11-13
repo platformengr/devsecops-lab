@@ -1,0 +1,13 @@
+name: triage
+on:
+  issues:
+    types: [opened]
+permissions: {}
+jobs:
+  triage:
+    permissions:
+      issues: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Seeded interpolation example
+        run: echo "${{ github.event.issue.title }}"

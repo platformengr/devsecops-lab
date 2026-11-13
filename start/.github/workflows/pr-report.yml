@@ -1,0 +1,22 @@
+name: privileged-report
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+permissions: {}
+jobs:
+  report:
+    if: github.event.workflow_run.head_repository.full_name == github.repository && github.event.workflow_run.actor.login == github.repository_owner
+    permissions:
+      actions: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: report
+          path: report
+      - name: Seeded unsafe consumer
+        run: sh report/summary.sh

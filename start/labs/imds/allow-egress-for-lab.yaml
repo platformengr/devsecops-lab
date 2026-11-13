@@ -1,0 +1,18 @@
+# Lab-only relaxation. Apply for the metadata test, then delete it to restore default deny.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-metadata-lab
+  namespace: checkout-dev
+spec:
+  podSelector:
+    matchLabels: { app: checkout }
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+      ports:
+        - protocol: TCP
+          port: 1338

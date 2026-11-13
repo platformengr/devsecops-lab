@@ -1,0 +1,20 @@
+name: ai-triage-lab
+on:
+  issues:
+    types: [opened]
+permissions: {}
+jobs:
+  agent:
+    permissions:
+      issues: write
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/triage-agent
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        with:
+          tools: add_label,comment,run_shell
+          prompt: "Choose a label from the allowlist. Issue: $ISSUE_TITLE"

@@ -1,0 +1,12 @@
+entries:
+  - id: S01
+    objective: Find a credential that grants a useful capability.
+    entry: Repository history.
+    trust_assumption: A deleted file is no longer available.
+    cheapest_path: Scan all refs for the fake lab-token format.
+    pivot: Use of a still-valid exposed token.
+    expected_signal: The scanner identifies a historical match.
+    stopping_control: Pre-commit rule, CI scan and token rotation.
+    before: Not tested.
+    after: Not tested.
+    evidence: []

@@ -1,0 +1,15 @@
+name: incident-simulation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show only a fake canary fingerprint
+        env:
+          CANARY: FAKE-DO-NOT-USE
+        run: |
+          printf '%s' "$CANARY" | wc -c
+          printf '%s' "$CANARY" | sha256sum

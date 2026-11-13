@@ -1,0 +1,44 @@
+name: catalog-ai-review
+on:
+  pull_request:
+    types: [opened, synchronize]
+permissions: {}
+jobs:
+  agent:
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/triage-agent
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        with:
+          tools: add_label,comment,run_shell
+          prompt: "Summarise this pull request: $PR_BODY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: catalog-decision
+          path: ${{ runner.temp }}/decision.json
+  apply:
+    needs: agent
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: catalog-decision
+          path: ${{ runner.temp }}/decision
+      - name: Check output before writing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          LABEL=$(jq -er '.label' "$RUNNER_TEMP/decision/decision.json")
+          grep -qxF "$LABEL" .github/ai/labels.txt
+          gh pr comment "$PR_NUMBER" --body "AI review label: $LABEL"

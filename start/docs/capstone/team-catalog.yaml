@@ -1,0 +1,59 @@
+team: catalog
+status: open
+findings:
+  - id: C01
+    surface: S01
+    status: open
+    evidence: []
+  - id: C02
+    surface: S02
+    status: open
+    evidence: []
+  - id: C03
+    surface: S03
+    status: open
+    evidence: []
+  - id: C04
+    surface: S04
+    status: open
+    evidence: []
+  - id: C05
+    surface: S05
+    status: open
+    evidence: []
+  - id: C06
+    surface: S06
+    status: open
+    evidence: []
+  - id: C07
+    surface: S07
+    status: open
+    evidence: []
+  - id: C08
+    surface: S08
+    status: open
+    evidence: []
+  - id: C09
+    surface: S02
+    status: open
+    evidence: []
+  - id: C10
+    surface: S03
+    status: open
+    evidence: []
+  - id: C11
+    surface: S04
+    status: open
+    evidence: []
+  - id: C12
+    surface: S05
+    status: open
+    evidence: []
+  - id: C13
+    surface: S06
+    status: open
+    evidence: []
+  - id: C14
+    surface: S08
+    status: open
+    evidence: []
